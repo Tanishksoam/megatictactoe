@@ -11,6 +11,7 @@ const Arena = () => {
       </div>
       <div></div>
     </div>
+    
   );
 };
 
