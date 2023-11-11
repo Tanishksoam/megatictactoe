@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-
+import produce from "immer";
 const initialState = {
   count: 0,
   matrix: [
@@ -13,31 +13,30 @@ const initialState = {
     [-1,-1,-1,-1,-1,-1,-1,-1,-1],
     [-1,-1,-1,-1,-1,-1,-1,-1,-1],
   ],
+  allowed:-1,
+  filled:[-999]
 };
 
+
+
 const keyReducer = (state = initialState, action) => {
-  if (action.type === "x") {
-    let newmatrix = JSON.parse(JSON.stringify(state.matrix));
-    newmatrix[action.payload[0]][action.payload[1]] = "X";
-    // console.log(state.matrix);
-    return {
-      
-      count: state.count + 1,
-      matrix: newmatrix,
-    };
-  } else if (action.type === "o") {
-    
-    let newmatrix = JSON.parse(JSON.stringify(state.matrix));
-    newmatrix[action.payload[0]][action.payload[1]] = "O";
-    return {
-      
-      count: state.count + 1,
-      matrix: newmatrix,
-    };
-  } else {
-    return state;
-  }
+  return produce(state, (draftState) => {
+    if (action.type === "x") {
+      draftState.matrix[action.payload[0]][action.payload[1]] = "X";
+      draftState.count += 1;
+    } else if (action.type === "o") {
+      draftState.matrix[action.payload[0]][action.payload[1]] = "O";
+      draftState.count += 1;
+    } else if (action.type === "allowed") {
+      draftState.allowed = action.payload;
+    } else if (action.type === "fill") {
+      draftState.filled.push(action.payload);
+    }
+  });
 };
+
+// ... (rest of the code)
+
 
 const store = configureStore({ reducer: keyReducer });
 
