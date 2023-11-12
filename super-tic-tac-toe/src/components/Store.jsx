@@ -14,7 +14,8 @@ const initialState = {
     [-1,-1,-1,-1,-1,-1,-1,-1,-1],
   ],
   allowed:-1,
-  filled:[-999]
+  filled:[-999],
+  winner:[-1,-1,-1,-1,-1,-1,-1,-1,-1]
 };
 
 
@@ -32,11 +33,11 @@ const keyReducer = (state = initialState, action) => {
     } else if (action.type === "fill") {
       draftState.filled.push(action.payload);
     }
+    else if(action.type === "winner"){
+      draftState.winner[action.payload[1]] = action.payload[0];
+    }
   });
 };
-
-// ... (rest of the code)
-
 
 const store = configureStore({ reducer: keyReducer });
 

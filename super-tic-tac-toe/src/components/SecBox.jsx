@@ -5,6 +5,7 @@ export default function SecBox(k) {
   const [filled, setFilled] = useState(false);
   const index = [parseInt(k.k.split(",")[0]), parseInt(k.k.split(",")[1])];
   const handleClick = () => {
+    
     if (filled) {
       return;
     }
@@ -33,16 +34,23 @@ export default function SecBox(k) {
     const winner = checkWinner(store.getState().matrix[index[0]]);
     if (winner === null) {
     } else if (winner == "Tie") {
-      alert("Tie");
       store.dispatch({ type: "fill", payload: index[0] });
+      const tie = document.getElementById(index[0]);
+      tie.innerHTML = "Tie";
+      tie.style.fontSize = "130px";
+      tie.style.textAlign = "center";
     } else {
-      alert(winner + " won");
+      store.dispatch({ type: "winner", payload: [winner,index[0]] });
       store.dispatch({ type: "fill", payload: index[0] });
+      const win = document.getElementById(index[0]);
+      win.innerHTML = winner;
+      win.style.fontSize = "130px";
+      win.style.textAlign = "center";
     }
-    console.log(store.getState().filled);
+    // console.log(store.getState().filled);
 
     const smallBoardWinner = checkWinner(store.getState().matrix[index[1]]);
-    console.log(smallBoardWinner);
+    // console.log(smallBoardWinner);
     if (smallBoardWinner !== null) {
       store.dispatch({ type: "allowed", payload: -1 });
     } else {
@@ -51,34 +59,43 @@ export default function SecBox(k) {
 
     for (let i = 0; i < 9; i++) {
       const allowedBoard = document.getElementById(i);
-      allowedBoard.style.backgroundColor = "rgb(20 ,184 ,166)";
+      allowedBoard.style.border = "1px solid rgb(20 ,184 ,166)";
     }
     if (store.getState().allowed === -1) {
       for (let i = 0; i < 9; i++) {
         const allowedBoard = document.getElementById(i);
-        allowedBoard.style.backgroundColor = "red";
+        allowedBoard.style.border = "solid 5px red";
         for (let j = 0; j < store.getState().filled.length; j++) {
           if (store.getState().filled[j] == i) {
-            allowedBoard.style.backgroundColor = "rgb(20 ,184 ,166)";
+            allowedBoard.style.border = "1px solid rgb(20 ,184 ,166)";
             break;
           }
         }
       }
+    } else {
+      const bigtictactoe = document.getElementById(k.k.split(",")[1]);
+      const smalltictactoe = document.getElementById(k.k.split(",")[0]);
+      smalltictactoe.style.border = "1px solid rgb(20 ,184 ,166)";
+      bigtictactoe.style.border = "solid 5px red";
     }
-    else{
-    const bigtictactoe = document.getElementById(k.k.split(",")[1]);
-    const smalltictactoe = document.getElementById(k.k.split(",")[0]);
-    smalltictactoe.style.backgroundColor = "rgb(20 ,184 ,166)";
-    bigtictactoe.style.backgroundColor = "red";}
+    const overallWinner = checkWinner(store.getState().winner);
+    // console.log(store.getState().winner);
+    if (overallWinner !== null) {
+      alert(`${overallWinner} has won the game}`)
+      return;
+    }
+
     setFilled(true);
   };
   return (
     <div
       id={k.k}
-      className="w-13 h-13 bg-teal-500"
+      className="w-13 h-13 bg-teal-500 flex justify-center align-center"
       onClick={() => {
         handleClick();
       }}
-    ></div>
+    >
+      &nbsp;
+    </div>
   );
 }
