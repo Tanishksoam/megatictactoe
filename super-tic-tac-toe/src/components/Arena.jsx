@@ -39,9 +39,9 @@ const Arena = () => {
       <div className="w-1/5 h-auto flex flex-col gap-20 justify-center items-end">
         {count % 2 === 0 ? (
           <Scard
-            img={cross}
-            color={grayColor}
-            color2="#F1EBD6"
+            img={darkcross}
+            color2={grayColor}
+            color="#F1EBD6"
             chance={false}
           />
         ) : (
@@ -55,12 +55,7 @@ const Arena = () => {
             chance={false}
           />
         ) : (
-          <Scard
-            img={darkcircle}
-            color="#F1EBD6"
-            color2="#545454"
-            chance={true}
-          />
+          <Scard img={circle} color="#545454" color2="#F1EBD6" chance={true} />
         )}
       </div>
     </div>

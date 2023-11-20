@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import store from "./Store";
 import checkWinner from "./Logic";
+
 export default function SecBox(k) {
   const [filled, setFilled] = useState(false);
   const index = [parseInt(k.k.split(",")[0]), parseInt(k.k.split(",")[1])];
   const handleClick = () => {
-    
     if (filled) {
       return;
     }
@@ -25,7 +25,10 @@ export default function SecBox(k) {
     }
 
     const d = document.getElementById(k.k);
-    d.innerHTML = store.getState().count % 2 === 0 ? "X" : "O";
+    d.innerHTML =
+      store.getState().count % 2 === 0
+        ? "<img src='src/assets/darkcross.png' class=' w-8 h-8 top-2 justify-center items-center absolute'>"
+        : "<img src='src/assets/circle.png' class=' w-8 h-8 top-2 justify-center items-center absolute'> ";
     if (store.getState().count % 2 === 0) {
       store.dispatch({ type: "x", payload: index });
     } else {
@@ -40,7 +43,7 @@ export default function SecBox(k) {
       tie.style.fontSize = "130px";
       tie.style.textAlign = "center";
     } else {
-      store.dispatch({ type: "winner", payload: [winner,index[0]] });
+      store.dispatch({ type: "winner", payload: [winner, index[0]] });
       store.dispatch({ type: "fill", payload: index[0] });
       const win = document.getElementById(index[0]);
       win.innerHTML = winner;
@@ -81,7 +84,7 @@ export default function SecBox(k) {
     const overallWinner = checkWinner(store.getState().winner);
     // console.log(store.getState().winner);
     if (overallWinner !== null) {
-      alert(`${overallWinner} has won the game}`)
+      alert(`${overallWinner} has won the game}`);
       return;
     }
 
@@ -90,12 +93,10 @@ export default function SecBox(k) {
   return (
     <div
       id={k.k}
-      className="w-13 h-13 bg-teal-500 flex justify-center align-center"
+      className="w-13 h-13 bg-teal-500 flex justify-center align-center relative"
       onClick={() => {
         handleClick();
       }}
-    >
-      &nbsp;
-    </div>
+    ></div>
   );
 }
