@@ -2,6 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import produce from "immer";
 const initialState = {
   count: 0,
+  countx: 0,
+  county: 0,
   matrix: [
     [-1,-1,-1,-1,-1,-1,-1,-1,-1],
     [-1,-1,-1,-1,-1,-1,-1,-1,-1],

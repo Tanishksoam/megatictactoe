@@ -7,7 +7,10 @@ const PrimBox = (ke) => {
   const [count, setCount] = useState(0);
 
   return (
-    <div className="w-48 h-48 p-5 bg-teal-500 flex justify-center align-middle" id={ke.ke}>
+    <div
+      className="w-48 h-48 p-5 bg-teal-500 flex justify-center align-middle relative"
+      id={ke.ke}
+    >
       {/* {console.log(ke)} */}
       <div
         className=" w-40 h-40 bg-teal-800 grid grid-cols-3 gap-1"

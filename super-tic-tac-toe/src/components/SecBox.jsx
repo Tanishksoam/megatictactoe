@@ -46,7 +46,10 @@ export default function SecBox(k) {
       store.dispatch({ type: "winner", payload: [winner, index[0]] });
       store.dispatch({ type: "fill", payload: index[0] });
       const win = document.getElementById(index[0]);
-      win.innerHTML = winner;
+      win.innerHTML =
+        winner === "X"
+          ? "<img src='src/assets/darkcross.png' class=' w-24 h-24 top-10 justify-center items-center absolute'>"
+          : "<img src='src/assets/circle.png' class=' w-24 h-24 top-10 justify-center items-center absolute'> ";
       win.style.fontSize = "130px";
       win.style.textAlign = "center";
     }
@@ -84,6 +87,14 @@ export default function SecBox(k) {
     const overallWinner = checkWinner(store.getState().winner);
     // console.log(store.getState().winner);
     if (overallWinner !== null) {
+      if (overallWinner === "Tie") {
+        alert("Tie");
+        return;
+      } else if (overallWinner === "X") {
+        store.getState().countx++;
+      } else {
+        store.getState().county++;
+      }
       alert(`${overallWinner} has won the game}`);
       return;
     }
