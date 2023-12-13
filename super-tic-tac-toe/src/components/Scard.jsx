@@ -13,7 +13,7 @@ function Scard({ img, color, color2, chance }) {
           style={
             chance
               ? {}
-              : { transform: "scale(-1,1)", transition: "all 2s ease-in-out" }
+              : { transform: "scale(-1,1)", transition: "all 0.5s ease-in-out" }
           }
           className="w-[60px] h-13"
           src={img}

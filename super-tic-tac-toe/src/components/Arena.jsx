@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PrimBox from "./PrimBox";
-import Scard from "./SCard";
+import Scard from "./Scard";
 import store from "./Store";
 import { circle, cross, reload, darkcircle, darkcross } from "/src/assets/images";
 
