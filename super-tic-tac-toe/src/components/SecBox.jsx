@@ -27,8 +27,8 @@ export default function SecBox(k) {
     const d = document.getElementById(k.k);
     d.innerHTML =
       store.getState().count % 2 === 0
-        ? "<img src='src/assets/darkcross.png' class=' w-8 h-8 top-2 justify-center items-center absolute'>"
-        : "<img src='src/assets/circle.png' class=' w-8 h-8 top-2 justify-center items-center absolute'> ";
+        ? "<img src='/src/assets/darkcross.png' class=' w-8 h-8 top-2 justify-center items-center absolute'>"
+        : "<img src='/src/assets/circle.png' class=' w-8 h-8 top-2 justify-center items-center absolute'> ";
     if (store.getState().count % 2 === 0) {
       store.dispatch({ type: "x", payload: index });
     } else {
@@ -48,8 +48,8 @@ export default function SecBox(k) {
       const win = document.getElementById(index[0]);
       win.innerHTML =
         winner === "X"
-          ? "<img src='src/assets/darkcross.png' class=' w-24 h-24 top-10 justify-center items-center absolute'>"
-          : "<img src='src/assets/circle.png' class=' w-24 h-24 top-10 justify-center items-center absolute'> ";
+          ? "<img src='/src/assets/darkcross.png' class=' w-24 h-24 top-10 justify-center items-center absolute'>"
+          : "<img src='/src/assets/circle.png' class=' w-24 h-24 top-10 justify-center items-center absolute'> ";
       win.style.fontSize = "130px";
       win.style.textAlign = "center";
     }
