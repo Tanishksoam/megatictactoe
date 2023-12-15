@@ -90,16 +90,28 @@ export default function SecBox(k) {
       if (overallWinner === "Tie") {
         alert("Tie");
         return;
-      } else if (overallWinner === "X") {
-        store.getState().countx++;
-      } else {
-        store.getState().county++;
+        
       }
-      alert(`${overallWinner} has won the game}`);
+      else {
+        alert(`${overallWinner} has won the game}`);
+      }
+      if (overallWinner === "X") {
+        store.dispatch({type:"addx"});
+        window.localStorage.setItem("countx",store.getState().countx)
+      } else {
+        store.dispatch({type:"addo"});
+        window.localStorage.setItem("counto",store.getState().counto)
+      }
+      // store.dispatch({type:"clear"})
+      // window.location.reload();
+      store.dispatch({type:"allowed",payload:100})
+      const allowedBoard = document.getElementById(index[1]);
+      allowedBoard.style.border = "1px solid rgb(20 ,184 ,166)";
       return;
     }
-
+    
     setFilled(true);
+    
   };
   return (
     <div

@@ -2,8 +2,8 @@ import { configureStore } from "@reduxjs/toolkit";
 import produce from "immer";
 const initialState = {
   count: 0,
-  countx: 0,
-  county: 0,
+  countx: 0|window.localStorage.getItem("countx"),
+  counto: 0|window.localStorage.getItem("counto"),
   matrix: [
     [-1,-1,-1,-1,-1,-1,-1,-1,-1],
     [-1,-1,-1,-1,-1,-1,-1,-1,-1],
@@ -37,6 +37,15 @@ const keyReducer = (state = initialState, action) => {
     }
     else if(action.type === "winner"){
       draftState.winner[action.payload[1]] = action.payload[0];
+    }
+    else if(action.type === "addx"){
+      draftState.countx +=1;
+    }
+    else if(action.type === "addo"){
+      draftState.counto +=1;
+    }
+    else if(action.type === "clear"){
+      draftState = initialState;
     }
   });
 };

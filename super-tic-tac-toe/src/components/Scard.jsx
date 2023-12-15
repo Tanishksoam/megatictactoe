@@ -1,8 +1,8 @@
 import React from "react";
 // import { cross } from "../assets/images";
 // import { circle } from "../assets/images";
-
-function Scard({ img, color, color2, chance }) {
+import store from "./Store";
+function Scard({ img, color, color2, chance ,score}) {
   return (
     <button
       style={{ background: color }}
@@ -40,7 +40,7 @@ function Scard({ img, color, color2, chance }) {
         className="w-18 h-15 items-center justify-center"
       >
         <p style={{ color: color2 }} className="w-5 text-3xl  font-bold">
-          0
+          {score}
         </p>
       </div>
     </button>
